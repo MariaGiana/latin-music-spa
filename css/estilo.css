@@ -1,0 +1,548 @@
+ /*Inicializamos todos los margenes y padding en 0*/
+ * {
+     margin: 0px;
+     padding: 0px;
+     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ }
+ p {
+     line-height: 1.3;
+ }
+
+ /*Cambios de Modo*/
+ body {
+     background-image: url(../img/fondoClaro.jpg);
+     color: black;
+ }
+
+ .oscuro {
+     background-image: url(../img/fondoOscuro.jpg);
+     color: white;
+ }
+
+ .ocultar_luna {
+     display: none;
+ }
+
+ .tema_pantalla_sol {
+     display: none;
+ }
+
+ .mostrar_sol {
+     display: block;
+ }
+
+ /*header*/
+ .primera_letra {
+     font-weight: bold;
+ }
+
+ header {
+     background-color: #8053ea;
+     width: 100%;
+     padding: 0px;
+ }
+
+ #portada img {
+     width: 20%;
+     margin-right: 20px;
+ }
+
+ #portada {
+     display: flex;
+     justify-content: start;
+     align-items: center;
+     padding: 5px;
+ }
+
+ h1 {
+     font-size: 170%;
+     text-align: center;
+     text-transform: uppercase;
+     margin: 5px;
+     color: azure;
+ }
+
+ #menu {
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
+
+ }
+
+ #menu img {
+     margin: 5px;
+     width: 35px;
+     cursor: pointer;
+ }
+
+ /*barra de navegacion*/
+ nav {
+     display: none;
+ }
+
+ .menu_desplegado {
+     display: block;
+ }
+
+ .menu_interactivo {
+     background: linear-gradient(#8053ea, #c7baf8);
+     padding: 3px;
+     list-style-type: none;
+ }
+
+ .menu_interactivo li a {
+     text-decoration: none;
+     color: azure;
+ }
+
+ .menu_interactivo li {
+     margin: 8px;
+ }
+ .nav_seleccionado{
+    color:blue;
+ }
+
+ /* Main */
+ main {
+     padding: 7px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 7px;
+ }
+
+ .titulo {
+     background-color: #7b7b7bd3;
+     padding: 10px;
+     border-radius: 10px;
+     box-shadow: 0px 15px 60px black;
+     margin-bottom: 8px;
+     margin-top: 8px;
+ }
+
+ h2 {
+     text-transform: uppercase;
+     text-align: center;
+     margin-bottom: 7px;
+ }
+
+ main img {
+     margin: 7px
+ }
+
+ /*tabla*/
+ .contenedor {
+     margin: 5px;
+ }
+
+ table a {
+     text-decoration: none;
+     color: inherit;
+ }
+
+ table td {
+     border: solid gray 3px;
+     background-color: #999999;
+     margin: 5px;
+     padding: 3px;
+     text-align: center;
+ }
+
+ tr td:nth-child(even) {
+     background-color: #c7baf8;
+     color: azure;
+ }
+
+ table {
+     border: solid gray 3px;
+     background-color: #7b7b7bd3;
+ }
+ #btns_paginacion{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+ }
+ 
+ /*formulario cargar canciones y agregar 3 canciones*/
+ .agrego_item{
+    margin: 10px;
+    background-color: #7b7b7bc5; 
+    width: 300px;
+    display: flex;
+    align-items: center;
+ 
+ }
+ .agrego_item img{
+    display: inline-block;
+ }
+ .agrego_item p{
+    font-size: 30px;
+ }
+ 
+ #formulario_cargar,#filtrar_elementos{
+    background-color: rgba(220, 220, 220, 0.553);
+    margin: 40px;
+    margin-left:10px;
+    width: 70%;
+ 
+ }
+ #filtrar_elementos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 98%;
+ }
+ #filtrar_elementos input,#formulario_cargar input{
+    height: 20px;
+ }
+ .form_oculto{
+    display: none;
+ }
+ #btn_cargar,#ver_anterior,#ver_siguiente,#btn_filtrar_anio,#reiniciar_anio_filtrar{
+    background-color: #534caf;
+     color: #ffffff;
+     border: solid black 1px;
+     border-radius: 10px;
+     padding: 2px 10px;
+     margin: 5px;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-size: 18px;
+     cursor: pointer;
+     
+ }
+ #formulario_cargar input{
+    background-color: gainsboro;
+ }
+ #formulario_cargar label{
+    font-size: 120%;
+ }
+
+ .mostrar_form{
+    display: flex;
+    flex-direction: column;
+ }
+ .agrego_item, #btn_agregar_varios{
+    margin: 10px;
+    background-color: #7b7b7bc5; 
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .agrego_item img, #btn_agregar_varios img{
+    display: inline-block;
+ }
+ .agrego_item p, #btn_agregar_varios p {
+    font-size: 30px;
+ }
+
+ /*Notificacion*/
+
+ #notificacion{
+    font-size: 30px;
+    background-color: #7b7b7bc5;
+    display: flex;
+    justify-content: center;
+ }
+ /*index 2*/
+ article {
+     background-color: #7b7b7bc5;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-bottom: 15px;
+     width: 100%;
+     padding: 7px;
+     padding-top: 0px;
+     border-radius: 10px;
+     box-shadow: 0px 15px 60px black;
+
+ }
+
+ article .img img {
+     width: 100%;
+     display: block;
+
+ }
+
+ article .img {
+     width: 95%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+ }
+
+ .cancion {
+     margin-top: 7px;
+ }
+
+ section {
+     margin: 20px;
+ }
+
+ section h3 {
+     font-size: 25px;
+     padding: 8px;
+     text-align: center;
+     background-color: #7b7b7b;
+     margin: 10px;
+
+ }
+
+ .encabezado {
+
+     background: linear-gradient(45deg, #8053ea, #c7baf8);
+     text-align: center;
+     padding: 10px;
+     width: 100%;
+ }
+
+ .encabezado h4,
+ .encabezado h5 {
+     padding: 2px;
+     font-size: 20px;
+ }
+
+ /*formulario*/
+
+ #mi_formulario {
+     background-color: #7b7b7bd3;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     width: 70%;
+     margin: 8px;
+     padding: 10px;
+     box-shadow: 0px 15px 60px black;
+ }
+
+ .imagen_formulario {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .imagen_formulario,
+ #imagen_captcha {
+     width: 100%;
+ }
+
+ .ocultar_formulario {
+     visibility: hidden;
+ }
+
+ .volver_al_home {
+     display: none;
+ }
+
+ .volver_al_home_btn {
+     display: block;
+
+ }
+
+ .volver_al_home_btn img {
+     width: 50px;
+     cursor: pointer;
+ }
+
+ #confirmar {
+     width: 95%;
+     background-color: #534caf;
+     color: #ffffff;
+     border: black;
+     border-radius: 10px;
+     padding: 10px 20px;
+     margin: 5px;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-size: 18px;
+     cursor: pointer;
+
+ }
+
+ #mi_formulario p {
+     font-size: 20px;
+ }
+
+ #captcha_error {
+     color: red;
+ }
+
+ .texto_volver {
+     font-size: 25px;
+     background-color: #7b7b7bc5;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 8px;
+     padding: 3px;
+ }
+ /*footer */
+ footer {
+     background-color: black;
+     padding: 5px;
+     color: azure;
+     text-align: center;
+     position: relative;
+     width: 100%;
+     bottom: 0;
+
+ }
+
+ footer p {
+     padding: 5px;
+ }
+
+
+
+ @media (width >=768px) {
+
+     /*header*/
+     header #portada img {
+         width: 10%;
+         margin: 15px;
+         margin-left: 25px;
+     }
+
+     #portada {
+         justify-content: start;
+
+     }
+
+     #portada h1 {
+         font-size: 50px;
+         margin-left: 35px;
+     }
+
+     #menu_hamburgesa {
+         display: none;
+     }
+
+     #menu {
+         justify-content: end;
+     }
+
+     nav {
+         display: block;
+     }
+
+     .menu_interactivo {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-evenly;
+         list-style-type: none;
+         font-size: 23px;
+         color:white;
+     }
+
+     .menu_interactivo li a:hover {
+         color: black
+     }
+     .menu_interactivo li:hover{
+        color:black;
+     }
+
+     /*titulo main*/
+     .titulo p {
+         font-size: 26px;
+     }
+
+     main h2 {
+         font-size: 35px;
+     }
+     #home,#info_extra,#agregar_nuevo_top,#formulario_contacto{
+        cursor: pointer;
+     }
+
+     /*tabla*/
+     main {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .contenedor {
+         width: 90%;
+     }
+
+     table {
+         width: 100%;
+         font-size: 26px;
+     }
+
+     td a:hover {
+         color: black;
+     }
+
+     /*tabla recomendados*/
+     .recomendados_gente{
+        width: 98%;
+     }
+     #btn_borrar,#btn_editar{
+        cursor: pointer;
+     }
+     /*INDEX 2 */
+     main {
+         padding: 10px;
+     }
+
+     article p {
+         font-size: 20px;
+     }
+
+     article {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         grid-template-areas:
+             "encabezado encabezado"
+             "cancion img"
+             "artista artista";
+
+     }
+
+     article .img {
+         grid-area: img;
+         width: 100%;
+     }
+
+     .cancion {
+         grid-area: cancion;
+     }
+
+     section {
+         grid-area: artista;
+         margin: 20px;
+     }
+
+     .encabezado {
+         grid-area: encabezado;
+         background: linear-gradient(45deg, #8053ea, #c7baf8);
+         text-align: center;
+         padding: 10px;
+     }
+
+     .encabezado h4,
+     .encabezado h5 {
+         padding: 2px;
+         font-size: 20px;
+     }
+
+     /* formulario*/
+
+     .texto_volver {
+         margin: 20px;
+     }
+
+     #imagen_captcha {
+         width: 40%;
+     }
+
+     label {
+         font-size: 20px;
+     }
+
+     #crear_varios_items{
+        cursor: pointer;
+     }
+
+ }

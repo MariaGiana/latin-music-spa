@@ -1,0 +1,123 @@
+<div class="titulo">
+    <h2>Las canciones mas escuchadas de los ultimos 5 años</h2>
+    <p>Son canciones que han llegado al puesto número uno en las listas de las más escuchadas en Argentina.
+        Descubre las melodías que han conquistado los corazones del público argentino y se han convertido en los
+        éxitos más grandes del país. Mantente al día con las tendencias musicales y disfruta de los temas que
+        lideran los rankings nacionales.</p>
+</div>
+<div class="contenedor">
+    <table>
+        <tr>
+            <td>
+                Top 2020
+            </td>
+            <td>
+                Tusa
+            </td>
+            <td>
+                - KAROL G, Nicki Minaj
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Top 2021
+            </td>
+            <td>
+                Miénteme
+            </td>
+            <td>
+                - TINI, Maria Becerra
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Top 2022
+            </td>
+            <td>
+                Music Sessions #52 
+            </td>
+            <td> 
+                - QUEVEDO || BZRP 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Top 2023
+            </td>
+            <td>
+                 Un Finde | CROSSOVER #2 
+            </td>
+            <td>
+                - Ke Personajes, FMK, Big One
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Top 2024
+            </td>
+            <td>
+                Hola Perdida
+            </td>
+            <td>
+                - Luck Ra, Khea
+            </td>
+        </tr>
+    </table>
+</div>
+<a href="https://open.spotify.com/playlist/3vuxUCCvVdYCr5obuJBfH0?si=d59feaa471424087" target="_blank"><img
+        src="img/spotify-logo.png" alt="logo spotify"></a>
+<div class="recomendados_gente">
+    <h2>recomendados por la gente</h2>
+
+
+    <form id="filtrar_elementos">
+        <label> Si desea puede filtrar por año:  </label>
+        <input type="number" name="anio_filtrar" required min="1900" max="2024">
+        <button id="btn_filtrar_anio">Filtrar</button>
+        <button id="reiniciar_anio_filtrar">Reiniciar</button>
+    </form>
+
+    <table id="top_recomendados">
+        <thead>
+            <tr>
+                <th>Nombre de la canción</th>
+                <th>Artista</th>
+                <th>Año de creación</th>
+            </tr>
+        </thead>
+        <tbody id="tabla_recomendados">
+
+        </tbody>
+        
+    </table>
+
+    <div id="btns_paginacion">
+        <button id="ver_anterior">Anterior</button>
+        <button id="ver_siguiente">Siguiente</button>
+    </div>
+    <div id="notificacion">
+        <!-- Aca se van a ver distintas notificaciones -->
+    </div>
+    <div class="agrego_item">
+        <p>Agregue su cancion</p>
+        <img src="img/agregar.svg" id="agregar_nuevo_top" alt="agregar"> 
+    </div>
+    
+
+    <form id="formulario_cargar" class="form_oculto">
+        <label>Nombre de la canción  </label>
+        <input type="text" id="nombre" name="nombre" alt="nombre" required>
+
+        <label>Artista  </label>
+        <input type="text" id="artista" name="artista" alt="artista" required>
+
+        <label>Año de creacion  </label>
+        <input type="number" id="anio_creacion" name="anio_creacion" alt="año_creacion" required min="1900" max="2024">
+        <button type="submit" id="btn_cargar">CARGAR</button>
+
+    </form>
+    <div id="btn_agregar_varios">
+        <p>Cargar 3 canciones</p>
+        <img src="img/agregar.svg" id="crear_varios_items" alt="crear"> 
+    </div >
+</form>

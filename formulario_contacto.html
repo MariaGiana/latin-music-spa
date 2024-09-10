@@ -1,0 +1,29 @@
+    <h1>Contactese con nosotros!!</h1>
+    <div class="texto_volver">
+        <p id="captcha"></p>
+        <a  class="volver_al_home"><img src="img/home.svg"></a>
+    </div>
+        <form id="mi_formulario">
+            <label>Nombre:</label>
+            <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+
+            <label>Apellido:</label>
+            <input type="text" name="apellido" placeholder="Ingrese su apellido" required>
+
+            <label>Teléfono:</label>
+            <input type="number" name="telefono" placeholder="Ingrese su numero" required>
+
+            <label>Email: </label>
+            <input type="email" name="email" placeholder="Ingrese su email" required>
+
+            <label>Observaciones:</label>
+            <textarea id="observaciones" cols="30" rows="10" placeholder="Dejanos tu consulta aqui"></textarea>
+            <p>Verifica que no eres un robot</p>
+            <div class="imagen_formulario">
+                <img src="" alt="captcha" id="imagen_captcha" />
+            </div>
+            <p>Ingrese el texto que observa en la siguente imagen</p>
+            <p id="captcha_error"></p>
+            <input type="text" name="texto_img" id="entrada_texto" placeholder="Ingrese el texto" required>
+            <button id="confirmar">Confirmar</button>
+        </form>
