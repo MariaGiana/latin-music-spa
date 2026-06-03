@@ -136,6 +136,8 @@ async function botones_filtro() {
 async function calcular_dimension() {
   const url_ = new URL(url_canciones);
   url_.searchParams.append("anio", anio_filtrar);
+  url_.searchParams.append("sortBy", "id");
+  url_.searchParams.append("order", "desc");
   let notificacion = document.querySelector("#notificacion");
   let dimension = 0;
   try {
@@ -149,7 +151,7 @@ async function calcular_dimension() {
   } catch (error) {
     notificacion.innerHTML = "Error del servidor";
   }
-  limpiar_notifiaciones();
+  limpiar_notificaciones();
   return dimension;
 }
 //------------------------------------------------------------------------------------
@@ -174,7 +176,7 @@ async function cargar_varios() {
         body: JSON.stringify(item),
       });
       if (res.ok) {
-        notificacion.innerHTML = "Creado con existo";
+        notificacion.innerHTML = "Creado con exito";
       } else {
         notificacion.innerHTML = "Error";
       }
@@ -183,7 +185,7 @@ async function cargar_varios() {
     notificacion.innerHTML = "Error";
   }
   cargar_tabla();
-  limpiar_notifiaciones();
+  limpiar_notificaciones();
 }
 function generar_nombre_aleatorio() {
   const nombres = [
@@ -210,7 +212,7 @@ function generar_artista_aleatorio() {
 }
 function generar_anio_aleatorio() {
   const anioMin = 1970;
-  const anioMax = 2024;
+  const anioMax = new Date().getFullYear();
   return Math.floor(Math.random() * (anioMax - anioMin + 1)) + anioMin;
 }
 //---------------------------------------------------------------------
@@ -265,19 +267,22 @@ async function cargar_tabla() {
   url_.searchParams.append("anio", anio_filtrar);
   url_.searchParams.append("page", pagina_actual_paginacion);
   url_.searchParams.append("limit", 10);
+  url_.searchParams.append("sortBy", "id");
+  url_.searchParams.append("order", "desc");
   try {
     let response = await fetch(url_);
     if (response.ok) {
       let objeto = await response.json();
       tabla.innerHTML = "";
-      for (let item of objeto) {
-        tabla.innerHTML += `<tr>
-                                        <td>${item.nombre}</td>
-                                        <td>${item.artista}</td>
-                                        <td>${item.anio}</td> 
-                                        <td><img src="img/borrar.svg" id="btn_borrar" alt="editar" ></img></td>
-                                        <td><img src="img/editar.svg" id="btn_editar" alt="editar" ></td>
-                                    </tr>`;
+     for (let item of objeto) {
+  tabla.innerHTML += `<tr>
+        <td>${item.nombre}</td>
+        <td>${item.artista}</td>
+        <td>${item.anio}</td> 
+        <td><img src="img/borrar.svg" class="btn_borrar" data-id="${item.id}" data-nombre="${item.nombre}" alt="borrar"></td>
+        <td><img src="img/editar.svg" class="btn_editar" data-id="${item.id}" alt="editar"></td>
+    </tr>`;
+
       }
       funciones_botones(objeto);
     } else {
@@ -292,13 +297,13 @@ async function cargar_tabla() {
 //funciones que tienen los botones de la tabla recomendados
 function funciones_botones(objeto) {
   let formulario_modificar = document.querySelector("#formulario_cargar");
-  let btn_borrar = document.querySelectorAll("#btn_borrar");
+  let btn_borrar = document.querySelectorAll(".btn_borrar");
   for (let pos = 0; pos < objeto.length; pos++) {
     btn_borrar[pos].addEventListener("click", function () {
       borrar_elemento(objeto[pos].id, objeto[pos].nombre);
     });
   }
-  let btn_editar = document.querySelectorAll("#btn_editar");
+  let btn_editar = document.querySelectorAll(".btn_editar");
   for (let pos = 0; pos < objeto.length; pos++) {
     btn_editar[pos].addEventListener("click", function () {
       formulario_modificar.classList.remove("form_oculto");
@@ -314,9 +319,10 @@ async function borrar_elemento(id, nombre) {
       method: "DELETE",
     });
     if (res.ok) {
-      notificacion.innerHTML = "Su cancion: " + nombre + "ha sido ELIMINADA!";
+      let notificacion = document.querySelector("#notificacion");
+      notificacion.innerHTML = "Su cancion: " + nombre + " ha sido ELIMINADA!";
       cargar_tabla();
-      limpiar_notifiaciones();
+      limpiar_notificaciones();
     }
   } catch (error) {
     notificacion.innerHTML = error;
@@ -325,16 +331,20 @@ async function borrar_elemento(id, nombre) {
 // edita el elemento seleccionado
 function editar_elemento(id, cancion) {
   let formulario_modificar = document.querySelector("#formulario_cargar");
-  formulario_modificar.querySelector("input[name='nombre']").value =
-    cancion.nombre;
-  formulario_modificar.querySelector("input[name='artista']").value =
-    cancion.artista;
-  formulario_modificar.querySelector("input[name='anio_creacion']").value =
-    cancion.anio;
+  
+  // RELLENAR CAMPOS
+  formulario_modificar.querySelector("input[name='nombre']").value = cancion.nombre;
+  formulario_modificar.querySelector("input[name='artista']").value = cancion.artista;
+  formulario_modificar.querySelector("input[name='anio_creacion']").value = cancion.anio;
 
-  formulario_modificar.addEventListener("submit", async function (event) {
+  // 🌟 EL TRUCO: Clonar el formulario para borrarle cualquier submit viejo acumulado
+  let nuevo_formulario = formulario_modificar.cloneNode(true);
+  formulario_modificar.parentNode.replaceChild(nuevo_formulario, formulario_modificar);
+  
+  // Ahora trabajamos con el formulario limpio de eventos anteriores
+  nuevo_formulario.addEventListener("submit", async function (event) {
     event.preventDefault();
-    let data = new FormData(formulario_modificar);
+    let data = new FormData(nuevo_formulario);
     let item = {
       nombre: data.get("nombre"),
       artista: data.get("artista"),
@@ -343,21 +353,20 @@ function editar_elemento(id, cancion) {
     try {
       let res = await fetch(`${url_canciones}/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item),
       });
       if (res.ok) {
-        notificacion.innerHTML =
-          "Su cancion " + item.nombre + " se modifico con exito ";
-        formulario_modificar.reset();
+        let notificacion = document.querySelector("#notificacion");
+        notificacion.innerHTML = "Su cancion " + item.nombre + " se modifico con exito ";
+        nuevo_formulario.reset();
         cargar_tabla();
-        limpiar_notifiaciones();
-        formulario_modificar.classList.remove("mostrar_form");
-        formulario_modificar.classList.add("form_oculto");
+        limpiar_notificaciones();
+        nuevo_formulario.classList.remove("mostrar_form");
+        nuevo_formulario.classList.add("form_oculto");
       }
     } catch (error) {
+      let notificacion = document.querySelector("#notificacion");
       notificacion.innerHTML = error;
     }
   });
@@ -366,6 +375,7 @@ function editar_elemento(id, cancion) {
 //cargar una cancion nueva
 function cargar_canciones() {
   let formulario_modificar = document.querySelector("#formulario_cargar");
+  
   if (formulario_modificar.classList.contains("form_oculto")) {
     formulario_modificar.classList.remove("form_oculto");
     formulario_modificar.classList.add("mostrar_form");
@@ -374,14 +384,23 @@ function cargar_canciones() {
     formulario_modificar.classList.add("form_oculto");
   }
 
-  formulario_modificar.addEventListener("submit", async function (event) {
+  // Clonamos el formulario para limpiar eventos viejos
+  let nuevo_formulario = formulario_modificar.cloneNode(true);
+  formulario_modificar.parentNode.replaceChild(nuevo_formulario, formulario_modificar);
+  nuevo_formulario.reset();
+
+  //  Le asignamos el evento al NUEVO formulario clonado
+  nuevo_formulario.addEventListener("submit", async function (event) {
     event.preventDefault();
-    let data = new FormData(formulario_modificar);
+    
+    // Leemos los datos del NUEVO formulario
+    let data = new FormData(nuevo_formulario);
     let item = {
       nombre: data.get("nombre"),
       artista: data.get("artista"),
       anio: Number(data.get("anio_creacion")),
     };
+    
     try {
       let res = await fetch(`${url_canciones}`, {
         method: "POST",
@@ -390,29 +409,40 @@ function cargar_canciones() {
         },
         body: JSON.stringify(item),
       });
+      
       if (res.ok) {
-        notificacion.innerHTML = "AGREGADO CON EXITO!";
-        formulario_modificar.reset();
+        let notificacion = document.querySelector("#notificacion");
+        notificacion.innerHTML = "¡AGREGADO CON ÉXITO!";
+        
+        // 4. Reseteamos y ocultamos el NUEVO formulario
+        nuevo_formulario.reset();
         cargar_tabla();
-        limpiar_notifiaciones();
-        formulario_modificar.classList.remove("mostrar_form");
-        formulario_modificar.classList.add("form_oculto");
+        limpiar_notificaciones();
+        nuevo_formulario.classList.remove("mostrar_form");
+        nuevo_formulario.classList.add("form_oculto");
       }
     } catch (error) {
+      let notificacion = document.querySelector("#notificacion");
       notificacion.innerHTML = error;
     }
   });
 }
+
 //vacia el div que muestra lo que se realizo
-function limpiar_notifiaciones() {
+function limpiar_notificaciones() {
   let nodo_intervalo = 4;
   let tiempo = setInterval(function () {
     if (nodo_intervalo === 0) {
       clearInterval(tiempo);
-      notificacion.innerHTML = "";
+     let alerta = document.querySelector("#notificacion");
+      if (alerta) {
+        alerta.innerHTML = "";
+      }
     }
     nodo_intervalo--;
   }, 1000);
 }
+
+
 //llamamos a la funcionesm que se deben cargar automaticamente
 cargar_portada();
