@@ -6,10 +6,9 @@
 🔗 **Demo en vivo / Live Demo:** [Latin Music Spa](https://latin-music-spa.netlify.app)
 
 ---
-<p align="center">
-  <img width="550" alt="desktop" src="https://github.com/user-attachments/assets/7485459e-4038-4d7a-b54d-8ffbdc492e59" />
-  <img width="140" alt="mobile" src="https://github.com/user-attachments/assets/bd69baef-0458-4208-97df-740fc118c64f" />
-</p>
+| Versión Escritorio / Desktop | Versión Mobile / Celular |
+| :---: | :---: |
+| <img width="500" alt="desktop" src="https://github.com/user-attachments/assets/7485459e-4038-4d7a-b54d-8ffbdc492e59" /> | <img width="140" alt="mobile" src="https://github.com/user-attachments/assets/bd69baef-0458-4208-97df-740fc118c64f" /> |
 
 ---  
 ## English
